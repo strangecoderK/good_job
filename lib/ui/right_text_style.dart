@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class TextStyles {
+abstract class RightTextStyle {
   static const TextStyle titleTextBold = TextStyle(
     fontFamily: 'right',
     fontSize: 50,
@@ -10,6 +10,11 @@ abstract class TextStyles {
   static const TextStyle headerTextBold = TextStyle(
     fontFamily: 'right',
     fontSize: 30,
+    fontWeight: FontWeight.bold,
+  );
+  static const TextStyle largerTextBold = TextStyle(
+    fontFamily: 'right',
+    fontSize: 25,
     fontWeight: FontWeight.bold,
   );
 
@@ -52,6 +57,12 @@ abstract class TextStyles {
   static const TextStyle headerTextRegular = TextStyle(
     fontFamily: 'right',
     fontSize: 30,
+    fontWeight: FontWeight.normal,
+  );
+
+  static const TextStyle largerTextRegular = TextStyle(
+    fontFamily: 'right',
+    fontSize: 25,
     fontWeight: FontWeight.normal,
   );
 

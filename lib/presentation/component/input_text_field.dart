@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_job/ui/right_text_style.dart';
 
 class InputTextField extends StatelessWidget {
   final String title;
@@ -15,20 +16,29 @@ class InputTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(30.0),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title),
+          Text(
+            title,
+            style: RightTextStyle.largeTextBold,
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: TextField(
               decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  hintText: hintText),
+                  hintText: hintText,
+                  hintStyle: RightTextStyle.largeTextRegular),
             ),
           ),
         ],
