@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:good_job/presentation/screen/main/main_screen.dart';
 import 'package:good_job/presentation/screen/make_sheet/make_sheet_screen.dart';
+import 'package:good_job/presentation/screen/make_sheet/make_sheet_view_model.dart';
 import 'package:good_job/presentation/screen/splash/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 final router = GoRouter(
   routes: [
@@ -15,7 +18,12 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/make-sheet',
-      builder: (context, state) => const MakeSheetScreen(),
+      builder: (context, state) {
+        return ChangeNotifierProvider<MakeSheetViewModel>(
+          create: (BuildContext context) => MakeSheetViewModel(),
+          child: const MakeSheetScreen(),
+        );
+      },
     ),
   ],
 );

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:good_job/ui/right_text_style.dart';
 
 class BigButton extends StatefulWidget {
   final String text;
-  final String? path;
+  final VoidCallback onTap;
 
-  const BigButton({super.key, required this.text, this.path});
+  const BigButton({super.key, required this.text, required this.onTap});
 
   @override
   State<BigButton> createState() => _BigButtonState();
@@ -23,11 +22,7 @@ class _BigButtonState extends State<BigButton> {
           bottom: 10,
         ),
         child: GestureDetector(
-          onTap: () {
-            if (widget.path != null) {
-              context.go(widget.path!);
-            }
-          },
+          onTap: widget.onTap,
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(

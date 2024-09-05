@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:good_job/ui/right_text_style.dart';
 
-class PickUpButton extends StatefulWidget {
+class PickUpButton extends StatelessWidget {
   final String text;
-
-  // final VoidCallback onTap;
+  final VoidCallback onTap;
+  final bool isSelected;
 
   const PickUpButton({
     super.key,
     required this.text,
+    required this.isSelected,
+    required this.onTap,
     // required this.onTap
   });
-
-  @override
-  State<PickUpButton> createState() => _PickUpButtonState();
-}
-
-class _PickUpButtonState extends State<PickUpButton> {
-  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +23,7 @@ class _PickUpButtonState extends State<PickUpButton> {
           right: 5.0,
         ),
         child: GestureDetector(
-          onTap: () {
-            isSelected = true;
-            setState(() {});
-          },
+          onTap:onTap,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -43,7 +35,7 @@ class _PickUpButtonState extends State<PickUpButton> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  widget.text,
+                  text,
                   style: RightTextStyle.largeTextBold
                       .copyWith(color: const Color(0xFF004000)),
                 ),

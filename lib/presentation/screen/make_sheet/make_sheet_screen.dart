@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:good_job/presentation/component/big_button.dart';
 import 'package:good_job/presentation/component/input_text_field.dart';
 import 'package:good_job/presentation/component/pick_up_button.dart';
+import 'package:good_job/presentation/screen/make_sheet/make_sheet_view_model.dart';
 import 'package:good_job/ui/right_text_style.dart';
+import 'package:provider/provider.dart';
 
 class MakeSheetScreen extends StatefulWidget {
   const MakeSheetScreen({super.key});
@@ -12,10 +14,19 @@ class MakeSheetScreen extends StatefulWidget {
 }
 
 class _MakeSheetScreenState extends State<MakeSheetScreen> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController controller = TextEditingController();
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<MakeSheetViewModel>();
+    final state = viewModel.state;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -24,10 +35,13 @@ class _MakeSheetScreenState extends State<MakeSheetScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InputTextField(
-              title: '챌린지 이름',
-              hintText: '3글자 이상으로 적어주세요!',
-              controller: controller),
+          Form(
+            key: _formKey,
+            child: InputTextField(
+                title: '챌린지 이름',
+                hintText: '2글자 이상으로 적어주세요!',
+                controller: controller),
+          ),
           const Padding(
             padding: EdgeInsets.all(30.0),
             child: Text(
@@ -36,7 +50,7 @@ class _MakeSheetScreenState extends State<MakeSheetScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
+            padding: EdgeInsets.only(
               left: 10.0,
               right: 10.0,
             ),
@@ -44,25 +58,44 @@ class _MakeSheetScreenState extends State<MakeSheetScreen> {
               children: [
                 PickUpButton(
                   text: '10일',
-                  // onTap: () {},
+                  isSelected: state.selectedButton == 10,
+                  onTap: () {
+                    viewModel.selectButton(10);
+                  },
                 ),
                 PickUpButton(
                   text: '15일',
-                  // onTap: () {},
+                  isSelected: state.selectedButton == 15,
+                  onTap: () {
+                    viewModel.selectButton(15);
+                  },
                 ),
                 PickUpButton(
                   text: '20일',
-                  // onTap: () {},
+                  isSelected: state.selectedButton == 20,
+                  onTap: () {
+                    viewModel.selectButton(20);
+                  },
                 ),
                 PickUpButton(
                   text: '30일',
-                  // onTap: () {},
+                  isSelected: state.selectedButton == 30,
+                  onTap: () {
+                    viewModel.selectButton(30);
+                  },
                 ),
               ],
             ),
           ),
           const Expanded(child: SizedBox()),
-          const BigButton(text: '만들기'),
+          BigButton(
+            text: '만들기',
+            onTap: () {
+              if (_formKey.currentState?.validate() == false) {
+                return;
+              }
+            },
+          ),
         ],
       ),
     );

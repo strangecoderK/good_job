@@ -25,20 +25,31 @@ class InputTextField extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: TextField(
+            child: TextFormField(
               decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  hintText: hintText,
-                  hintStyle: RightTextStyle.largeTextRegular),
+                filled: true,
+                fillColor: Colors.white,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                hintText: hintText,
+                hintStyle: RightTextStyle.largeTextRegular,
+                errorStyle: TextStyle(
+                  color: Colors.green,
+                ),
+                errorBorder: InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
+              ),
+              validator: (String? value) {
+                return (value == null || value.length < 2)
+                    ? '2글자 이상으로 적어주세요.'
+                    : null;
+              },
             ),
           ),
         ],
