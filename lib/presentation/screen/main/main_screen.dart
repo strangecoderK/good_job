@@ -21,7 +21,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       body: Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
               '챌린지 목록이 비었어요',

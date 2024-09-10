@@ -30,7 +30,7 @@ class _MakeSheetScreenState extends State<MakeSheetScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('새로운 챌린지 만들기', style: RightTextStyle.headerTextBold),
+        title: const Text('새로운 챌린지 만들기', style: RightTextStyle.largerTextBold),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +93,9 @@ class _MakeSheetScreenState extends State<MakeSheetScreen> {
             onTap: () {
               if (_formKey.currentState?.validate() == false) {
                 return;
+              }
+              if (state.selectedButton != null) {
+                //TODO : 하이브에 저장, 화면 이동
               }
             },
           ),

@@ -6,7 +6,9 @@ class MakeSheetViewModel with ChangeNotifier {
 
   MakeSheetState get state => _state;
 
-  void MakeSheet() {}
+  void MakeSheet({required String name}) {
+
+  }
 
   void selectButton(int value) {
     _state = state.copyWith(selectedButton: value);

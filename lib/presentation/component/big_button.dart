@@ -26,7 +26,7 @@ class _BigButtonState extends State<BigButton> {
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color(0xFFF0F2E2),
+              color: const Color(0xFF7B9A5F),
               borderRadius: const BorderRadius.all(Radius.circular(15)),
             ),
             child: Padding(
