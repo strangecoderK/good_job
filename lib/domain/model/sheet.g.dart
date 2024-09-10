@@ -21,8 +21,8 @@ class SheetAdapter extends TypeAdapter<Sheet> {
       name: fields[1] as String,
       count: fields[2] as int,
       filledCount: fields[3] as int,
-      lastFilledDate: fields[4] as DateTime?,
-      ableToCheck: fields[5] as bool?,
+      ableToCheck: fields[4] as bool,
+      lastFilledDate: fields[5] as DateTime?,
     );
   }
 
@@ -39,9 +39,9 @@ class SheetAdapter extends TypeAdapter<Sheet> {
       ..writeByte(3)
       ..write(obj.filledCount)
       ..writeByte(4)
-      ..write(obj.lastFilledDate)
+      ..write(obj.ableToCheck)
       ..writeByte(5)
-      ..write(obj.ableToCheck);
+      ..write(obj.lastFilledDate);
   }
 
   @override

@@ -18,17 +18,22 @@ class Sheet extends HiveObject {
   int filledCount;
 
   @HiveField(4)
-  DateTime? lastFilledDate;
+  bool ableToCheck;
 
   @HiveField(5)
-  bool? ableToCheck;
+  DateTime? lastFilledDate;
 
   Sheet({
     required this.id,
     required this.name,
     required this.count,
     required this.filledCount,
+    required this.ableToCheck,
     this.lastFilledDate,
-    this.ableToCheck,
   });
+
+  @override
+  String toString() {
+    return 'Sheet{id: $id, name: $name, count: $count, filledCount: $filledCount, ableToCheck: $ableToCheck, lastFilledDate: $lastFilledDate}';
+  }
 }

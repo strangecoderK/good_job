@@ -26,6 +26,7 @@ class InputTextField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: TextFormField(
+              controller: controller,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
