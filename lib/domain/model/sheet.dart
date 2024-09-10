@@ -31,9 +31,4 @@ class Sheet extends HiveObject {
     required this.ableToCheck,
     this.lastFilledDate,
   });
-
-  @override
-  String toString() {
-    return 'Sheet{id: $id, name: $name, count: $count, filledCount: $filledCount, ableToCheck: $ableToCheck, lastFilledDate: $lastFilledDate}';
-  }
 }

@@ -10,5 +10,6 @@ class MakeSheetState with _$MakeSheetState {
     int? selectedButton,
   }) = _MakeSheetState;
 
-  factory MakeSheetState.fromJson(Map<String, Object?> json) => _$MakeSheetStateFromJson(json);
+  factory MakeSheetState.fromJson(Map<String, Object?> json) =>
+      _$MakeSheetStateFromJson(json);
 }

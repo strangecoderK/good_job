@@ -42,7 +42,15 @@ class _MainScreenState extends State<MainScreen> {
             )
           : ListView(
               children: viewModel.sheets!.values
-                  .map((e) => SheetTile(sheet: e))
+                  .map((e) => SheetTile(
+                        sheet: e,
+                        onTap: () {
+                          context.go(
+                            '/sheet-${e.count}',
+                            extra: e,
+                          );
+                        },
+                      ))
                   .toList()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
