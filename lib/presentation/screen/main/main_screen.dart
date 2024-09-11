@@ -53,6 +53,7 @@ class _MainScreenState extends State<MainScreen> {
                       ))
                   .toList()),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF7B9A5F),
         onPressed: () async {
           context.go('/make-sheet');
         },

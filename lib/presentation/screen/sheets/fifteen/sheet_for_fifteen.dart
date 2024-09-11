@@ -62,7 +62,7 @@ class _SheetForFifteenState extends State<SheetForFifteen> {
                         child: viewModel.getSticker(widget.sheet.id, row, col)
                             ? ClipOval(
                                 child: Image.asset(
-                                  'assets/10.png',
+                                  viewModel.getImageForPosition(row, col),
                                   fit: BoxFit.fill,
                                 ),
                               )

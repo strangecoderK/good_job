@@ -55,14 +55,16 @@ class _SheetForTwentyState extends State<SheetForTwenty> {
                         width: 50,
                         height: 50,
                         margin: const EdgeInsets.all(5),
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.grey,
+                          color: viewModel.getSticker(widget.sheet.id, row, col)
+                              ? Colors.white
+                              : Colors.grey,
                         ),
                         child: viewModel.getSticker(widget.sheet.id, row, col)
                             ? ClipOval(
                                 child: Image.asset(
-                                  'assets/10.png',
+                                  viewModel.getColor(widget.sheet.id, row, col),
                                   fit: BoxFit.fill,
                                 ),
                               )

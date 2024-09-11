@@ -17,10 +17,14 @@ class Sticker extends HiveObject {
   @HiveField(3)
   bool isSelected;
 
+  @HiveField(4)
+  int stickerId;
+
   Sticker({
     required this.sheetId,
     required this.row,
     required this.col,
     required this.isSelected,
+    required this.stickerId,
   });
 }

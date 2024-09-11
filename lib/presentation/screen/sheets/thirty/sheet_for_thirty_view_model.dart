@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:good_job/domain/model/sheet.dart';
 import 'package:good_job/domain/model/sticker.dart';
@@ -32,8 +34,14 @@ class SheetForThirtyViewModel with ChangeNotifier {
 
   void tapSticker(String sheetId, int row, int col, bool isSelected) {
     final key = '$sheetId$row$col';
-    final sticker =
-    Sticker(sheetId: sheetId, row: row, col: col, isSelected: isSelected);
+    final stickerId = Random().nextInt(18) + 1;
+    final sticker = Sticker(
+      sheetId: sheetId,
+      row: row,
+      col: col,
+      isSelected: isSelected,
+      stickerId: stickerId,
+    );
     stickers!.put(key, sticker);
     notifyListeners();
   }
@@ -43,5 +51,11 @@ class SheetForThirtyViewModel with ChangeNotifier {
     sheet!.filledCount += 1;
     sheets!.put(sheetId, sheet);
     notifyListeners();
+  }
+
+  String getColor(String sheetId, int row, int col) {
+    final key = '$sheetId$row$col';
+    final sticker = stickers!.get(key);
+    return 'assets/${sticker!.stickerId}.png';
   }
 }

@@ -33,7 +33,7 @@ class SheetForFifteenViewModel with ChangeNotifier {
   void tapSticker(String sheetId, int row, int col, bool isSelected) {
     final key = '$sheetId$row$col';
     final sticker =
-        Sticker(sheetId: sheetId, row: row, col: col, isSelected: isSelected);
+        Sticker(sheetId: sheetId, row: row, col: col, isSelected: isSelected, stickerId: 0,);
     stickers!.put(key, sticker);
     notifyListeners();
   }
@@ -43,5 +43,10 @@ class SheetForFifteenViewModel with ChangeNotifier {
     sheet!.filledCount += 1;
     sheets!.put(sheetId, sheet);
     notifyListeners();
+  }
+
+  String getImageForPosition(int row, int col) {
+    String index = '${row}_$col';
+    return 'assets/15_$index.png';
   }
 }
