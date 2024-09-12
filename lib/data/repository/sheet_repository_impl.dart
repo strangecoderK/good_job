@@ -5,13 +5,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 class SheetRepositoryImpl implements SheetRepository {
   @override
   Box<Sheet> getSheetsBox() {
-    return  Hive.box<Sheet>('sheets');
+    return Hive.box<Sheet>('sheets');
   }
 
   @override
-  void addSheet({required String name, required int count}) {
-
-  }
+  void addSheet({required String name, required int count}) {}
 
   @override
   void deleteSheet() {

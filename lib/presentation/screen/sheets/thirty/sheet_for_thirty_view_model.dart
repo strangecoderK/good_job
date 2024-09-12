@@ -5,6 +5,7 @@ import 'package:good_job/domain/model/sheet.dart';
 import 'package:good_job/domain/model/sticker.dart';
 import 'package:good_job/domain/repository/sheet_repository.dart';
 import 'package:good_job/domain/repository/sticker_repository.dart';
+import 'package:good_job/presentation/component/delete_alert_dialog.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class SheetForThirtyViewModel with ChangeNotifier {
@@ -34,28 +35,86 @@ class SheetForThirtyViewModel with ChangeNotifier {
 
   void tapSticker(String sheetId, int row, int col, bool isSelected) {
     final key = '$sheetId$row$col';
-    final stickerId = Random().nextInt(18) + 1;
-    final sticker = Sticker(
-      sheetId: sheetId,
-      row: row,
-      col: col,
-      isSelected: isSelected,
-      stickerId: stickerId,
-    );
-    stickers!.put(key, sticker);
-    notifyListeners();
+    final existingSticker = stickers!.get(key);
+    final sheet = sheets!.get(sheetId);
+
+    if (sheet!.ableToCheck == true) {
+      if (existingSticker?.isSelected ?? false) {
+        return;
+      }
+      final stickerId = Random().nextInt(18) + 1;
+      final sticker = Sticker(
+        sheetId: sheetId,
+        row: row,
+        col: col,
+        isSelected: isSelected,
+        stickerId: stickerId,
+      );
+      stickers!.put(key, sticker);
+      plusCount(sheetId);
+      notifyListeners();
+    } else {
+      return;
+    }
   }
 
   void plusCount(String sheetId) {
     Sheet? sheet = sheets!.get(sheetId);
     sheet!.filledCount += 1;
+    sheet.ableToCheck = false;
+    sheet.lastFilledDate = DateTime.now();
     sheets!.put(sheetId, sheet);
-    notifyListeners();
   }
 
   String getColor(String sheetId, int row, int col) {
     final key = '$sheetId$row$col';
     final sticker = stickers!.get(key);
     return 'assets/${sticker!.stickerId}.png';
+  }
+
+  void checkTodayFilled(String sheetId) {
+    Sheet? sheet = sheets!.get(sheetId);
+    final date = DateTime.now();
+    if (sheet!.lastFilledDate == null) {
+      return;
+    } else {
+      if (sheet.lastFilledDate!.year != date.year ||
+          sheet.lastFilledDate!.month != date.month ||
+          sheet.lastFilledDate!.day != date.day) {
+        sheet.ableToCheck = true;
+      }
+    }
+    sheets!.put(sheetId, sheet);
+    notifyListeners();
+  }
+
+  bool ableToCheck(String sheetId) {
+    final sheet = sheets?.get(sheetId);
+    return sheet?.ableToCheck ?? false;
+  }
+
+  bool checkCompleted(String sheetId) {
+    final sheet = sheets?.get(sheetId);
+    return sheet?.count == sheet?.filledCount;
+  }
+
+  void deleteSheet(String sheetId) {
+    sheets!.delete(sheetId);
+    notifyListeners();
+  }
+
+  void showDeleteDialog(
+    BuildContext context,
+    String sheetId,
+    VoidCallback cancelOnTap,
+    VoidCallback okOnTap,
+  ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => DeleteAlertDialog(
+        cancelOnTap: cancelOnTap,
+        okOnTap: okOnTap,
+      ),
+    );
   }
 }
