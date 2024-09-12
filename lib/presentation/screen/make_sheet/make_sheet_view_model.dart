@@ -26,4 +26,34 @@ class MakeSheetViewModel with ChangeNotifier {
     _state = state.copyWith(selectedButton: value);
     notifyListeners();
   }
+
+  String getStickerPath(int value) {
+    String stickerPath = '';
+    switch (value) {
+      case 10:
+        stickerPath = 'assets/10_0_1.png';
+      case 15:
+        stickerPath = 'assets/15_0_0.png';
+      case 20:
+        stickerPath = 'assets/4.png';
+      case 30:
+        stickerPath = 'assets/4.png';
+    }
+    return stickerPath;
+  }
+
+  String getStickerName(int value) {
+    String stickerName = '';
+    switch (value) {
+      case 10:
+        stickerName = '도넛';
+      case 15:
+        stickerName = '당구공';
+      case 20:
+        stickerName = '과일';
+      case 30:
+        stickerName = '과일';
+    }
+    return stickerName;
+  }
 }
