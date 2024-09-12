@@ -49,7 +49,6 @@ class _SheetForTwentyState extends State<SheetForTwenty> {
                     return GestureDetector(
                       onTap: () {
                         viewModel.tapSticker(widget.sheet.id, row, col, true);
-                        viewModel.plusCount(widget.sheet.id);
                       },
                       child: Container(
                         width: 50,

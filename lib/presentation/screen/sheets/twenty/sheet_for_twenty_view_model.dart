@@ -31,8 +31,15 @@ class SheetForTwentyViewModel with ChangeNotifier {
     final sticker = stickers!.get(key);
     return sticker?.isSelected ?? false;
   }
+
   void tapSticker(String sheetId, int row, int col, bool isSelected) {
     final key = '$sheetId$row$col';
+    final existingSticker = stickers!.get(key);
+
+    if (existingSticker?.isSelected ?? false) {
+      return;
+    }
+
     final stickerId = Random().nextInt(18) + 1;
     final sticker = Sticker(
       sheetId: sheetId,
@@ -42,6 +49,7 @@ class SheetForTwentyViewModel with ChangeNotifier {
       stickerId: stickerId,
     );
     stickers!.put(key, sticker);
+    plusCount(sheetId);
     notifyListeners();
   }
 
@@ -49,7 +57,6 @@ class SheetForTwentyViewModel with ChangeNotifier {
     Sheet? sheet = sheets!.get(sheetId);
     sheet!.filledCount += 1;
     sheets!.put(sheetId, sheet);
-    notifyListeners();
   }
 
   String getColor(String sheetId, int row, int col) {
