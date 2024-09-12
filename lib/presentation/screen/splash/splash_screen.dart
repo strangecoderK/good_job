@@ -10,10 +10,15 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Image.asset('assets/splash.png',width: 70,),
+            ),
             const Text(
               '오늘도 좋은 습관을 만들러 가볼까요?',
               style: RightTextStyle.largerTextBold,

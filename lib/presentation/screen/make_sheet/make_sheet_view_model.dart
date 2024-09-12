@@ -14,12 +14,13 @@ class MakeSheetViewModel with ChangeNotifier {
 
   MakeSheetState get state => _state;
 
-  Future<void> addSheet(String name, int count) async {
+  Future<Sheet> addSheet(String name, int count) async {
     final String id = DateTime.now().toString();
     final Sheet sheet = Sheet(
         id: id, name: name, count: count, filledCount: 0, ableToCheck: true);
     repository.getSheetsBox().put(id, sheet);
     notifyListeners();
+    return sheet;
   }
 
   void selectButton(int value) {
@@ -37,7 +38,7 @@ class MakeSheetViewModel with ChangeNotifier {
       case 20:
         stickerPath = 'assets/4.png';
       case 30:
-        stickerPath = 'assets/4.png';
+        stickerPath = 'assets/7.png';
     }
     return stickerPath;
   }

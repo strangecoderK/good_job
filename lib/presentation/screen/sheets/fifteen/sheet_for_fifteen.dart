@@ -30,6 +30,7 @@ class _SheetForFifteenState extends State<SheetForFifteen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<SheetForFifteenViewModel>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         title: Text(

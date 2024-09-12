@@ -30,6 +30,7 @@ class _SheetForTenState extends State<SheetForTen> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<SheetForTenViewModel>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -41,26 +42,27 @@ class _SheetForTenState extends State<SheetForTen> {
             context.go('/main');
           },
           icon: const Icon(Icons.arrow_back),
-        ),  actions: [
-        PopupMenuButton(itemBuilder: (context) {
-          return [
-            PopupMenuItem(
-              onTap: () {
-                viewModel.showDeleteDialog(context, widget.sheet.id, () {
-                  context.pop();
-                }, (){
-                  context.go('/main');
-                  viewModel.deleteSheet(widget.sheet.id);
-                });
-              },
-              child: const Text(
-                '삭제하기',
-                style: RightTextStyle.largeTextRegular,
+        ),
+        actions: [
+          PopupMenuButton(itemBuilder: (context) {
+            return [
+              PopupMenuItem(
+                onTap: () {
+                  viewModel.showDeleteDialog(context, widget.sheet.id, () {
+                    context.pop();
+                  }, () {
+                    context.go('/main');
+                    viewModel.deleteSheet(widget.sheet.id);
+                  });
+                },
+                child: const Text(
+                  '삭제하기',
+                  style: RightTextStyle.largeTextRegular,
+                ),
               ),
-            ),
-          ];
-        })
-      ],
+            ];
+          })
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
