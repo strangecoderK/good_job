@@ -7,17 +7,4 @@ class SheetRepositoryImpl implements SheetRepository {
   Box<Sheet> getSheetsBox() {
     return Hive.box<Sheet>('sheets');
   }
-
-  @override
-  void addSheet({required String name, required int count}) {}
-
-  @override
-  void deleteSheet() {
-    // TODO: implement deleteSheet
-  }
-
-  @override
-  void updateSheet() {
-    // TODO: implement updateSheet
-  }
 }

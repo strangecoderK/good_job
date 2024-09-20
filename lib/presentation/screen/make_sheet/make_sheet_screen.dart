@@ -128,7 +128,11 @@ class _MakeSheetScreenState extends State<MakeSheetScreen> {
                     final sheet = await viewModel.addSheet(
                         controller.text, state.selectedButton!);
                     if (context.mounted) {
-                      context.go('/sheet-${sheet.count}',extra: sheet);
+                      if (viewModel.isFirstMake() == false) {
+                        viewModel.showAd();
+                      }
+                      viewModel.updateCheck();
+                      context.go('/sheet-${sheet.count}', extra: sheet);
                     }
                   }
                 },
