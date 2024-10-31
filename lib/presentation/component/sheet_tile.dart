@@ -13,7 +13,8 @@ class SheetTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(
           top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
-      child: GestureDetector(onTap: onTap,
+      child: GestureDetector(
+        onTap: onTap,
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -24,9 +25,31 @@ class SheetTile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Icon(Icons.pets),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: sheet.count == 10
+                      ? Image.asset(
+                          'assets/10_0_1.png',
+                          width: 50,
+                          height: 50,
+                        )
+                      : sheet.count == 15
+                          ? Image.asset(
+                              'assets/15_0_0.png',
+                              width: 50,
+                              height: 50,
+                            )
+                          : sheet.count == 20
+                              ? Image.asset(
+                                  'assets/4.png',
+                                  width: 50,
+                                  height: 50,
+                                )
+                              : Image.asset(
+                                  'assets/7.png',
+                                  width: 50,
+                                  height: 50,
+                                ),
                 ),
                 Expanded(
                   child: Column(
@@ -38,7 +61,8 @@ class SheetTile extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 12.0),
-                        child: Align(alignment: Alignment.bottomRight,
+                        child: Align(
+                          alignment: Alignment.bottomRight,
                           child: Text(
                             '${sheet.filledCount}/${sheet.count}',
                             style: RightTextStyle.mediumTextRegular,
