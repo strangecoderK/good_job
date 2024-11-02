@@ -59,15 +59,18 @@ class SheetTile extends StatelessWidget {
                         sheet.name,
                         style: RightTextStyle.largeTextBold,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${sheet.id.split(' ')[0]} ~',
+                            style: RightTextStyle.mediumTextRegular,
+                          ),
+                          Text(
                             '${sheet.filledCount}/${sheet.count}',
                             style: RightTextStyle.mediumTextRegular,
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
