@@ -33,9 +33,19 @@ class _SheetForTenState extends State<SheetForTen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          widget.sheet.name,
-          style: RightTextStyle.headerTextBold,
+        title: Expanded(
+          child: Column(
+            children: [
+              Text(
+                widget.sheet.name,
+                style: RightTextStyle.headerTextBold,
+              ),
+              Text(
+                '${widget.sheet.id.split(' ')[0]}~',
+                style: RightTextStyle.smallTextRegular,
+              )
+            ],
+          ),
         ),
         leading: IconButton(
           onPressed: () {
