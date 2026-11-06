@@ -39,7 +39,7 @@ class MakeSheetViewModel with ChangeNotifier {
 
     final Sheet sheet = Sheet(
         id: id, name: name, count: count, filledCount: 0, ableToCheck: true);
-    repository.getSheetsBox().put(id, sheet);
+    await repository.getSheetsBox().put(id, sheet);
 
     notifyListeners();
     return sheet;
@@ -81,12 +81,11 @@ class MakeSheetViewModel with ChangeNotifier {
   }
 
   void hideSystemUI() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
   void showSystemUI() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
   void showAd() {

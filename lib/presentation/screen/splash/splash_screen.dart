@@ -26,38 +26,40 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Image.asset(
-                'assets/splash.png',
-                width: 70,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Image.asset(
+                  'assets/splash.png',
+                  width: 70,
+                ),
               ),
-            ),
-            const Text(
-              '오늘도 좋은 습관을 만들러 가볼까요?',
-              style: RightTextStyle.largerTextBold,
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            TextButton(
-              onPressed: () {
-                final check = checkBox?.get(1);
-                final firstCheck = Check(isFirstMake: true);
-                if (check == null) {
-                  checkBox?.put(1, firstCheck);
-                }
-                print(checkBox?.get(1));
-                context.go('/main');
-              },
-              child: const Text(
-                '좋아요!',
-                style: RightTextStyle.largeTextBold,
+              const Text(
+                '오늘도 좋은 습관을 만들러 가볼까요?',
+                style: RightTextStyle.largerTextBold,
               ),
-            )
-          ],
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              TextButton(
+                onPressed: () {
+                  final check = checkBox?.get(1);
+                  final firstCheck = Check(isFirstMake: true);
+                  if (check == null) {
+                    checkBox?.put(1, firstCheck);
+                  }
+                  print(checkBox?.get(1));
+                  context.go('/main');
+                },
+                child: const Text(
+                  '좋아요!',
+                  style: RightTextStyle.largeTextBold,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

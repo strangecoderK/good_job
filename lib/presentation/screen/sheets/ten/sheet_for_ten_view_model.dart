@@ -36,7 +36,7 @@ class SheetForTenViewModel with ChangeNotifier {
     final existingSticker = stickers!.get(key);
     final sheet = sheets!.get(sheetId);
 
-    if (sheet!.ableToCheck == true) {
+    if (sheet?.ableToCheck == true) {
       if (existingSticker?.isSelected ?? false) {
         return;
       }
@@ -57,7 +57,8 @@ class SheetForTenViewModel with ChangeNotifier {
 
   void plusCount(String sheetId) {
     Sheet? sheet = sheets!.get(sheetId);
-    sheet!.filledCount += 1;
+    if (sheet == null) return;
+    sheet.filledCount += 1;
     sheet.ableToCheck = false;
     sheet.lastFilledDate = DateTime.now();
     sheets!.put(sheetId, sheet);
@@ -71,7 +72,7 @@ class SheetForTenViewModel with ChangeNotifier {
   void checkTodayFilled(String sheetId) {
     Sheet? sheet = sheets!.get(sheetId);
     final date = DateTime.now();
-    if (sheet!.lastFilledDate == null) {
+    if (sheet == null || sheet.lastFilledDate == null) {
       return;
     } else {
       if (sheet.lastFilledDate!.year != date.year ||
@@ -91,7 +92,7 @@ class SheetForTenViewModel with ChangeNotifier {
 
   bool checkCompleted(String sheetId) {
     final sheet = sheets?.get(sheetId);
-    return sheet?.count == sheet?.filledCount;
+    return sheet != null && sheet.count == sheet.filledCount;
   }
 
   void deleteSheet(String sheetId) {

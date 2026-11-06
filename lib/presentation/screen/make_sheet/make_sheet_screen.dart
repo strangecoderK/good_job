@@ -39,106 +39,110 @@ class _MakeSheetScreenState extends State<MakeSheetScreen> {
         centerTitle: true,
         title: const Text('새로운 챌린지 만들기', style: RightTextStyle.largerTextBold),
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Form(
-                      key: _formKey,
-                      child: InputTextField(
-                          title: '챌린지 이름',
-                          hintText: '2글자 이상으로 적어주세요!',
-                          controller: controller),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(30.0),
-                      child: Text(
-                        '며칠동안 도전해볼까요?',
-                        style: RightTextStyle.largeTextBold,
+      body: SafeArea(
+        top: false,
+        bottom: false,
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Form(
+                        key: _formKey,
+                        child: InputTextField(
+                            title: '챌린지 이름',
+                            hintText: '2글자 이상으로 적어주세요!',
+                            controller: controller),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10.0,
-                        right: 10.0,
+                      const Padding(
+                        padding: EdgeInsets.all(30.0),
+                        child: Text(
+                          '며칠동안 도전해볼까요?',
+                          style: RightTextStyle.largeTextBold,
+                        ),
                       ),
-                      child: Row(
-                        children: [
-                          PickUpButton(
-                            text: '10일',
-                            isSelected: state.selectedButton == 10,
-                            onTap: () {
-                              viewModel.selectButton(10);
-                              FocusScope.of(context).unfocus();
-                            },
-                          ),
-                          PickUpButton(
-                            text: '15일',
-                            isSelected: state.selectedButton == 15,
-                            onTap: () {
-                              viewModel.selectButton(15);
-                              FocusScope.of(context).unfocus();
-                            },
-                          ),
-                          PickUpButton(
-                            text: '20일',
-                            isSelected: state.selectedButton == 20,
-                            onTap: () {
-                              viewModel.selectButton(20);
-                              FocusScope.of(context).unfocus();
-                            },
-                          ),
-                          PickUpButton(
-                            text: '30일',
-                            isSelected: state.selectedButton == 30,
-                            onTap: () {
-                              viewModel.selectButton(30);
-                              FocusScope.of(context).unfocus();
-                            },
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                        ),
+                        child: Row(
+                          children: [
+                            PickUpButton(
+                              text: '10일',
+                              isSelected: state.selectedButton == 10,
+                              onTap: () {
+                                viewModel.selectButton(10);
+                                FocusScope.of(context).unfocus();
+                              },
+                            ),
+                            PickUpButton(
+                              text: '15일',
+                              isSelected: state.selectedButton == 15,
+                              onTap: () {
+                                viewModel.selectButton(15);
+                                FocusScope.of(context).unfocus();
+                              },
+                            ),
+                            PickUpButton(
+                              text: '20일',
+                              isSelected: state.selectedButton == 20,
+                              onTap: () {
+                                viewModel.selectButton(20);
+                                FocusScope.of(context).unfocus();
+                              },
+                            ),
+                            PickUpButton(
+                              text: '30일',
+                              isSelected: state.selectedButton == 30,
+                              onTap: () {
+                                viewModel.selectButton(30);
+                                FocusScope.of(context).unfocus();
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    state.selectedButton != null
-                        ? ShowStickerContainer(
-                            stickerPath:
-                                viewModel.getStickerPath(state.selectedButton!),
-                            stickerName:
-                                viewModel.getStickerName(state.selectedButton!))
-                        : const SizedBox.shrink(),
-                  ],
+                      state.selectedButton != null
+                          ? ShowStickerContainer(
+                              stickerPath: viewModel
+                                  .getStickerPath(state.selectedButton!),
+                              stickerName: viewModel
+                                  .getStickerName(state.selectedButton!))
+                          : const SizedBox.shrink(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SafeArea(
-              child: BigButton(
-                text: '만들기',
-                onTap: () async {
-                  if (_formKey.currentState?.validate() == false) {
-                    return;
-                  }
-                  if (state.selectedButton != null) {
-                    final sheet = await viewModel.addSheet(
-                        controller.text, state.selectedButton!);
-                    if (context.mounted) {
-                      if (viewModel.isFirstMake() == false) {
-                        viewModel.showAd();
-                      }
-                      viewModel.updateCheck();
-                      context.go('/sheet-${sheet.count}', extra: sheet);
+              SafeArea(
+                child: BigButton(
+                  text: '만들기',
+                  onTap: () async {
+                    if (_formKey.currentState?.validate() == false) {
+                      return;
                     }
-                  }
-                },
+                    if (state.selectedButton != null) {
+                      final sheet = await viewModel.addSheet(
+                          controller.text, state.selectedButton!);
+                      if (context.mounted) {
+                        if (viewModel.isFirstMake() == false) {
+                          viewModel.showAd();
+                        }
+                        viewModel.updateCheck();
+                        context.go('/sheet-${sheet.count}', extra: sheet);
+                      }
+                    }
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
